@@ -128,4 +128,15 @@ call_analysis_observer <- function(input, output, session, data_reactive, select
         message_rv(list(text = paste0("Plot saved to ", selected_dir_reactive()), type = "success"))
       }
 
-      message_rv(list(text = "Analysis complete!",
+      message_rv(list(text = "Analysis complete!", type = "success"))
+
+    }, error = function(e) {
+      message_rv(list(text = paste("Analysis Error:", e$message), type = "danger"))
+      output$result_text <- renderPrint({ cat("") })
+      output$result_plot <- renderPlot(plot.new())
+    }, finally = {
+      analysis_running(FALSE)
+      session$sendCustomMessage('analysisStatus', FALSE)
+    })
+  })
+}

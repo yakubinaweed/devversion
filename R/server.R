@@ -77,7 +77,6 @@ server <- function(input, output, session) {
         # This prevents reactive expressions from trying to use stale data from Main Tab
         data_reactive(NULL)
         selected_dir_reactive(NULL)
-        # Clear main analysis outputs (render empty content)
         output$result_text <- renderPrint({ cat("") })
         output$result_plot <- renderPlot(plot.new())
         # Also reset main tab input selections visually
@@ -170,7 +169,7 @@ server <- function(input, output, session) {
 
   output$gmm_col_age_selector <- renderUI({
     data <- gmm_uploaded_data_rv()
-    if (is.null(data)) return(NULL)
+    if (is.is.null(data)) return(NULL)
     selectInput("gmm_col_age", "Select Age Column:", choices = names(data),
                 selected = c("Age", "age", "leeftijd")[c("Age", "age", "leeftijd") %in% names(data)][1])
   })
@@ -350,7 +349,6 @@ server <- function(input, output, session) {
         gmm_processed_data_rv(NULL) # Clear processed data on error
       }, finally = {
         analysis_running(FALSE)
-        # Assuming gmm_results_tabs is correctly defined in the UI that is rendered
         shinyjs::enable("gmm_results_tabs") # Re-enable tab switching
         print("DEBUG: GMM analysis finally block executed.")
       })
