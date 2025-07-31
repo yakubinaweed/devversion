@@ -17,7 +17,7 @@ ui <- navbarPage(
     useShinyjs(), # Enable shinyjs for this tab
 
     tags$head( # Include custom CSS for styling
-      includeCSS("www/styles.css")
+      includeCSS("www/styles.css") # This path is correct if www/ is inside R/
     ),
 
     # JavaScript to disable tab switching during analysis

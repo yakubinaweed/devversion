@@ -169,7 +169,7 @@ server <- function(input, output, session) {
 
   output$gmm_col_age_selector <- renderUI({
     data <- gmm_uploaded_data_rv()
-    if (is.is.null(data)) return(NULL)
+    if (is.null(data)) return(NULL)
     selectInput("gmm_col_age", "Select Age Column:", choices = names(data),
                 selected = c("Age", "age", "leeftijd")[c("Age", "age", "leeftijd") %in% names(data)][1])
   })
